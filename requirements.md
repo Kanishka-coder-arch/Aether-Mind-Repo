@@ -1,4 +1,4 @@
-# Content Intelligence Platform - Software Requirements Specification
+# AI Content Assistant - Software Requirements Specification
 
 ## 1. Problem Statement
 
@@ -299,4 +299,5 @@ CREATE INDEX idx_publish_history_user_id ON publish_history(user_id);
 **Project Type**: Hackathon MVP  
 **Team Size**: 2 developers  
 **Timeline**: 4 days
+
 
