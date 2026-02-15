@@ -1,272 +1,302 @@
-# Content Intelligence Platform - Requirements Document
+# Content Intelligence Platform - Software Requirements Specification
 
-## Executive Summary
+## 1. Problem Statement
 
-A lean AI-powered content intelligence platform built for rapid deployment. Focuses on core content creation, transformation, and basic analytics using serverless AWS services.
+Content creators face multiple challenges in today's digital landscape:
+- Time-consuming manual content creation process
+- Difficulty repurposing content across multiple platforms
+- Lack of insights into content sentiment and tone
+- Fragmented tools for creation, analysis, and publishing
+- High costs associated with multiple SaaS subscriptions
 
-## Project Overview
+There is a need for an integrated platform that combines AI-powered content generation, intelligent transformation, sentiment analysis, and direct social media publishing in a single, cost-effective solution.
 
-### Purpose
-Enable content creators to generate, transform, and analyze content efficiently using AI, with minimal infrastructure overhead.
+## 2. Proposed Solution
 
-### Scope
-- AI-powered content generation (text, summaries)
-- Content format transformation
-- Basic sentiment and engagement analysis
-- Serverless, cost-effective architecture
-- 2-person team, hackathon-ready implementation
+An AI-powered Content Intelligence Platform that provides:
+- **AI Content Generation**: Create blog posts, social media content, and marketing copy using transformer-based NLP models
+- **Content Transformation**: Convert long-form content into multiple short-form variations
+- **Sentiment Analysis**: Analyze tone, sentiment, and extract key entities
+- **Social Media Publishing**: Direct integration with Twitter/X and LinkedIn for instant publishing
+- **Unified Dashboard**: Single interface for the entire content lifecycle
 
-## Functional Requirements
+## 3. Differentiation from Existing Tools
 
-### 1. Content Creation
+| Feature | Existing Tools | Our Platform |
+|---------|---------------|--------------|
+| Content Generation | ✓ (separate tools) | ✓ |
+| Sentiment Analysis | ✓ (separate tools) | ✓ |
+| Social Publishing | ✓ (separate tools) | ✓ |
+| Unified Pipeline | ✗ | ✓ |
+| Cost | $50-200/month | $10-30/month |
+| Architecture | Monolithic/SaaS | Modern cloud-native |
 
-#### 1.1 AI-Powered Content Generation
-- Generate text content using Amazon Bedrock (Claude/Llama models)
-- Support content types: blog posts, social media posts, product descriptions
-- Customizable parameters: tone, length, target audience
-- Simple prompt-based interface
-- English language (primary), optional Hindi/regional language support
+Unlike standalone tools (Jasper AI, Grammarly, Buffer), this platform combines generation, analysis, and publishing into a single lightweight system with modern tech stack.
 
-#### 1.2 Content Input
-- Simple text input form
-- Topic/keyword input
-- Content type selection
-- Basic formatting options
+## 4. Unique Selling Proposition (USP)
 
-### 2. Content Transformation
+- **End-to-End Workflow**: Create → Analyze → Transform → Publish in one platform
+- **AI-Powered Intelligence**: Transformer-based NLP for high-quality content
+- **Direct Social Integration**: Publish to Twitter/LinkedIn with one click
+- **Cost-Effective**: 70% cheaper than multiple SaaS subscriptions
+- **Rapid Repurposing**: 1 blog post → 5 platform-ready variations instantly
+- **Built for Indian Creators**: Optional regional language support
 
-#### 2.1 Format Conversion
-- Long-form to short-form (summaries, tweets, LinkedIn posts)
-- Generate multiple variations from single content
-- Extract key points and highlights
-- Simple text-to-text transformations
+## 5. Target Users
 
-#### 2.2 Translation (Optional)
-- Amazon Translate for Hindi/regional languages
-- Basic translation without cultural adaptation
-- Support 2-3 Indian languages initially
+### Primary Users
+- **Content Creators**: Bloggers, writers, freelancers
+- **Social Media Managers**: Managing multiple brand accounts
+- **Small Business Owners**: Creating marketing content
+- **Digital Marketers**: Running campaigns across platforms
 
-### 3. Content Analysis
+### User Personas
+1. **Freelance Writer**: Needs to generate content quickly and publish across platforms
+2. **Marketing Manager**: Requires content analysis and multi-platform distribution
+3. **Startup Founder**: Limited budget, needs all-in-one solution
 
-#### 3.1 Sentiment Analysis
-- Amazon Comprehend for sentiment detection
-- Identify positive, negative, neutral tone
-- Entity recognition (people, places, brands)
-- Key phrase extraction
+## 6. Use Cases
 
-#### 3.2 Basic Metrics
-- Content length and readability score
-- Keyword density
-- Tone consistency check
+### UC-1: Generate Blog Post
+**Actor**: Content Creator  
+**Flow**:
+1. User enters topic and selects content type
+2. System generates content using AI
+3. User reviews and edits content
+4. System saves content to database
 
-### 4. Content Management
+### UC-2: Transform Content
+**Actor**: Content Creator  
+**Flow**:
+1. User selects existing long-form content
+2. User chooses transformation type (tweet, LinkedIn post)
+3. System generates multiple variations
+4. User selects preferred version
 
-#### 4.1 Storage and Retrieval
-- Store generated content in S3
-- Metadata storage in DynamoDB
-- Simple search by title, date, type
-- Content history tracking
+### UC-3: Analyze Sentiment
+**Actor**: Content Creator  
+**Flow**:
+1. User selects content for analysis
+2. System analyzes sentiment and extracts entities
+3. System displays sentiment score and key phrases
+4. User adjusts content based on insights
 
-#### 4.2 Basic Dashboard
-- List of generated content
-- View content details
-- Sentiment and analysis results
-- Simple usage statistics
+### UC-4: Publish to Social Media
+**Actor**: Content Creator  
+**Flow**:
+1. User connects social media account via OAuth
+2. User selects content to publish
+3. User previews and confirms
+4. System publishes to platform
+5. System tracks publishing status
 
-## Technical Requirements
+### UC-5: View Dashboard
+**Actor**: Content Creator  
+**Flow**:
+1. User accesses dashboard
+2. System displays content list, sentiment scores, publishing history
+3. User filters by date, type, or platform
 
-### 5. System Architecture
+## 7. Functional Requirements
 
-#### 5.1 High-Level Flow
+### FR-1: User Authentication
+- FR-1.1: Users shall register with email and password
+- FR-1.2: Users shall login with JWT-based authentication
+- FR-1.3: System shall maintain user sessions for 24 hours
+- FR-1.4: Users shall logout and invalidate tokens
+
+### FR-2: Content Generation
+- FR-2.1: System shall generate content using Amazon Bedrock (Claude/Llama models)
+- FR-2.2: Users shall specify content type (blog, tweet, LinkedIn post, product description)
+- FR-2.3: Users shall customize tone (professional, casual, friendly)
+- FR-2.4: Users shall set content length (short, medium, long)
+- FR-2.5: System shall generate content within 30 seconds
+- FR-2.6: System shall store generated content in S3 and metadata in database
+
+### FR-3: Content Transformation
+- FR-3.1: System shall convert long-form content to short-form (summaries, tweets)
+- FR-3.2: System shall generate 3-5 variations per transformation request
+- FR-3.3: Users shall select and save preferred variations
+- FR-3.4: System shall maintain original content reference
+
+### FR-4: Sentiment Analysis
+- FR-4.1: System shall analyze sentiment using transformer-based NLP models via Amazon Bedrock
+- FR-4.2: System shall classify sentiment as positive, negative, neutral, or mixed
+- FR-4.3: System shall provide sentiment confidence score (0-1)
+- FR-4.4: System shall extract key phrases and entities
+- FR-4.5: System shall identify people, places, and brands in content
+
+### FR-5: Social Media Integration
+- FR-5.1: System shall support OAuth 2.0 authentication for Twitter/X and LinkedIn
+- FR-5.2: Users shall connect multiple social media accounts
+- FR-5.3: Users shall publish content directly to connected platforms
+- FR-5.4: System shall preview content before publishing
+- FR-5.5: System shall track publishing status and platform post IDs
+- FR-5.6: System shall display publishing history
+
+### FR-6: Content Management
+- FR-6.1: Users shall view list of all generated content
+- FR-6.2: Users shall search content by title, type, or date
+- FR-6.3: Users shall edit existing content
+- FR-6.4: Users shall delete content
+- FR-6.5: System shall maintain content version history
+
+### FR-7: Dashboard and Analytics
+- FR-7.1: System shall display total content count
+- FR-7.2: System shall show sentiment distribution
+- FR-7.3: System shall display publishing statistics
+- FR-7.4: Users shall filter data by date range
+
+## 8. Non-Functional Requirements
+
+### NFR-1: Performance
+- NFR-1.1: API response time shall be < 3 seconds for non-AI operations
+- NFR-1.2: Content generation shall complete within 30 seconds
+- NFR-1.3: System shall support 50-100 concurrent users
+- NFR-1.4: Database queries shall execute within 500ms
+
+### NFR-2: Scalability
+- NFR-2.1: Backend shall scale horizontally to handle increased load
+- NFR-2.2: Database shall support up to 10,000 content records
+- NFR-2.3: System shall handle 1,000 API requests per hour
+
+### NFR-3: Security
+- NFR-3.1: All API communications shall use HTTPS/TLS 1.2+
+- NFR-3.2: User passwords shall be hashed using bcrypt
+- NFR-3.3: JWT tokens shall expire after 24 hours
+- NFR-3.4: Social media tokens shall be encrypted at rest
+- NFR-3.5: Database shall implement row-level security
+- NFR-3.6: API shall implement rate limiting (100 requests/minute per user)
+
+### NFR-4: Usability
+- NFR-4.1: UI shall be responsive and mobile-friendly
+- NFR-4.2: System shall provide clear error messages
+- NFR-4.3: Content generation shall show progress indicators
+- NFR-4.4: UI shall follow consistent design patterns
+
+### NFR-5: Reliability
+- NFR-5.1: System shall have 99% uptime during demo period
+- NFR-5.2: Failed operations shall be logged for debugging
+- NFR-5.3: System shall handle API failures gracefully
+
+## 9. Data Requirements
+
+### Database Schema (Supabase - PostgreSQL)
+
+```sql
+-- Users table
+CREATE TABLE users (
+  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  email VARCHAR(255) UNIQUE NOT NULL,
+  password_hash VARCHAR(255) NOT NULL,
+  name VARCHAR(255),
+  created_at TIMESTAMP DEFAULT NOW()
+);
+
+-- Content table
+CREATE TABLE content (
+  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  user_id UUID REFERENCES users(id) ON DELETE CASCADE,
+  title VARCHAR(500) NOT NULL,
+  content_type VARCHAR(50) NOT NULL,
+  s3_key VARCHAR(500) NOT NULL,
+  sentiment VARCHAR(20),
+  sentiment_score DECIMAL(3,2),
+  key_phrases JSONB,
+  created_at TIMESTAMP DEFAULT NOW(),
+  updated_at TIMESTAMP DEFAULT NOW()
+);
+
+-- Social media connections
+CREATE TABLE social_connections (
+  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  user_id UUID REFERENCES users(id) ON DELETE CASCADE,
+  platform VARCHAR(50) NOT NULL,
+  access_token TEXT NOT NULL,
+  refresh_token TEXT,
+  token_expires_at TIMESTAMP,
+  connected_at TIMESTAMP DEFAULT NOW(),
+  UNIQUE(user_id, platform)
+);
+
+-- Publishing history
+CREATE TABLE publish_history (
+  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  content_id UUID REFERENCES content(id) ON DELETE CASCADE,
+  user_id UUID REFERENCES users(id) ON DELETE CASCADE,
+  platform VARCHAR(50) NOT NULL,
+  platform_post_id VARCHAR(255),
+  status VARCHAR(50) NOT NULL,
+  published_at TIMESTAMP DEFAULT NOW()
+);
+
+-- Indexes for performance
+CREATE INDEX idx_content_user_id ON content(user_id);
+CREATE INDEX idx_content_created_at ON content(created_at DESC);
+CREATE INDEX idx_publish_history_user_id ON publish_history(user_id);
 ```
-User → Frontend → API Gateway → Lambda → Bedrock (Content Generation)
-                                   ↓
-                              Comprehend (Sentiment Analysis)
-                                   ↓
-                          S3 + DynamoDB (Storage)
-```
 
-#### 5.3 Core Services
-- **Amazon Bedrock**: Foundation models for content generation (Claude 3 or Llama 3)
-- **AWS Lambda**: Serverless backend functions
-- **Amazon API Gateway**: REST API endpoints
-- **Amazon S3**: Content storage
-- **Amazon DynamoDB**: Metadata and user data
-- **Amazon Comprehend**: Sentiment analysis and NLP
-- **Amazon Translate**: Optional multi-language support
-- **Amazon CloudWatch**: Basic logging and monitoring
-
-#### 5.4 Security (Minimal)
-- **AWS IAM**: Service permissions
-- **API Gateway API Keys**: Simple API authentication
-- **S3 encryption**: Server-side encryption at rest
-
-### 6. System Requirements
-
-#### 6.1 Performance
-- Content generation within 10-30 seconds (Bedrock latency)
-- API response time < 3 seconds for non-AI operations
-- Support 50-100 concurrent users (hackathon demo scale)
-- Lambda auto-scaling handles burst traffic
-
-#### 6.2 Security
-- HTTPS for all API calls
-- API key authentication
-- S3 server-side encryption
-- IAM least-privilege policies
-
-#### 6.3 Scalability
-- Serverless auto-scaling (Lambda, API Gateway)
-- DynamoDB on-demand capacity
-- Single region deployment (us-east-1 or ap-south-1)
-
-#### 6.4 API Design
-- RESTful API with JSON responses
-- Simple API documentation
-- CORS enabled for web frontend
-
-### 7. Data Requirements
-
-#### 7.1 Data Storage
-- **S3**: Generated content (text files, JSON)
-- **DynamoDB**: Content metadata (title, type, timestamp, sentiment scores)
-- **CloudWatch Logs**: Application logs
-
-#### 7.2 Data Model (DynamoDB)
-```
-ContentTable:
-  - contentId (PK)
-  - userId
-  - title
-  - contentType
-  - createdAt
-  - s3Key
-  - sentiment
-  - keyPhrases
-```
-
-#### 7.3 Data Retention
-- Keep all content for demo purposes
-- No automatic deletion (manual cleanup if needed)
-
-## Non-Functional Requirements
-
-### 8. Usability
-- Simple, clean web interface
-- Mobile-friendly (responsive design)
-- Minimal learning curve
-
-### 9. Reliability
-- Leverage AWS service reliability (99.9%+)
-- Basic error handling and retry logic
-- CloudWatch for monitoring
-
-### 10. Maintainability
-- Infrastructure as Code (AWS SAM or CloudFormation)
-- Clear code structure
-- Basic documentation
-- Environment variables for configuration
-
-### 11. Cost Optimization
-- Serverless = pay-per-use
-- DynamoDB on-demand pricing
-- S3 standard storage (no Glacier)
-- Estimated cost: $20-50/month for demo usage
-
-## User Roles and Permissions
-
-### Single User Role (MVP)
-- Generate content via API
-- View generated content
-- Access sentiment analysis
-- Transform content formats
-
-(No complex RBAC for hackathon - single API key or basic auth)
-
-## Unique Selling Proposition (USP)
-
-- **Unified AI pipeline**: Creation + Transformation + Analysis in one platform
-- **Serverless-first architecture** for ultra-low cost and scalability
-- **Built for Indian creators** with optional regional language support
-- **Rapid content repurposing**: 1 blog → 5 platform-ready posts instantly
-- **Hackathon-ready but production-scalable** design
-
-## Differentiation
-
-Unlike standalone tools (e.g., only AI writers or only analytics dashboards), this platform combines AI content generation, transformation, and engagement intelligence into a single lightweight serverless system.
-
-## Success Metrics (Hackathon Demo)
-
-- Successfully generate 10+ content pieces during demo
-- Sentiment analysis accuracy > 80%
-- API response time < 5 seconds (excluding Bedrock latency)
-- Zero crashes during presentation
-- Positive judge feedback on AI quality
-
-## Constraints and Assumptions
+## 10. Constraints and Assumptions
 
 ### Constraints
-- 2-person team, limited time
-- AWS Free Tier / minimal budget
-- Bedrock API rate limits
-- No custom ML model training
+- **Team Size**: 2 developers
+- **Timeline**: 4 days (hackathon)
+- **Budget**: AWS Free Tier + Supabase Free Tier (~$30 max)
+- **Bedrock Rate Limits**: 20 requests/minute
+- **Social Media API Limits**: Twitter (50 posts/day), LinkedIn (100 posts/day)
+- **No Custom ML Training**: Use pre-trained models only
 
 ### Assumptions
+- Users have modern web browsers (Chrome, Firefox, Safari)
+- Users have stable internet connectivity
+- AWS Bedrock access is enabled in account
+- Twitter/X and LinkedIn developer accounts are available
+- English is the primary language (MVP)
 - Demo environment only (not production-ready)
-- English primary language
-- Modern web browser for frontend
-- AWS account with Bedrock access enabled
-- Single region deployment sufficient
 
-## Future Enhancements (Post-Hackathon)
-
-- User authentication (Cognito)
-- Content scheduling and publishing
-- Integration with social media APIs
-- Advanced analytics dashboard
-- Multi-user support
-- Custom fine-tuned models
-- Image generation (Bedrock Stable Diffusion)
-
-## Implementation Priority
-
-### Phase 1 (Core MVP - Day 1-2)
-1. Set up AWS infrastructure (Lambda, API Gateway, S3, DynamoDB)
-2. Integrate Amazon Bedrock for content generation
-3. Basic API endpoints (generate, retrieve)
-4. Simple web frontend
-
-### Phase 2 (Enhancement - Day 3)
-1. Add Amazon Comprehend for sentiment analysis
-2. Content transformation features
-3. Improve UI/UX
-4. Testing and bug fixes
-
-### Phase 3 (Polish - Day 4)
-1. Add optional translation (if time permits)
-2. Dashboard improvements
-3. Demo preparation
-4. Documentation
-
-## Technology Stack
-
-### Backend
-- Runtime: Python 3.11 or Node.js 18
-- Framework: AWS Lambda (no framework needed)
-- IaC: AWS SAM or CloudFormation
+## 11. Technology Stack
 
 ### Frontend
-- React or simple HTML/CSS/JS
-- Hosted on S3 + CloudFront (optional) or local
+- React.js 18+ (UI framework)
+- Tailwind CSS (styling)
+- Axios (HTTP client)
 
-### Development Tools
-- AWS CLI
-- Postman (API testing)
-- VS Code
+### Backend
+- Node.js 18+ with Express.js (API server)
+- AWS SDK v3 (Bedrock, S3)
+- Supabase JS Client (database)
+
+### Database
+- Supabase (Managed PostgreSQL)
+
+### Cloud Services
+- AWS Bedrock (AI content generation & sentiment analysis)
+- AWS S3 (content storage)
+- AWS CloudWatch (monitoring)
+
+### External APIs
+- Twitter/X API v2
+- LinkedIn API
+
+## 12. Future Scope
+
+### Phase 2 Enhancements
+- Multi-platform support (Instagram, Facebook, Medium)
+- Content scheduling with calendar view
+- Team collaboration features
+- Advanced analytics with engagement tracking
+- Custom AI model fine-tuning for brand voice
+- Image generation using Bedrock Stable Diffusion
+- AI-powered hashtag suggestions
+- Content performance predictions
+- Regional language support (Hindi, Tamil, Bengali)
 
 ---
 
-**Document Version**: 2.0 (Hackathon Edition)  
+**Document Version**: 3.0  
+**Document Type**: Software Requirements Specification (SRS)  
 **Last Updated**: February 15, 2026  
+**Project Type**: Hackathon MVP  
 **Team Size**: 2 developers  
 **Timeline**: 4 days
+
