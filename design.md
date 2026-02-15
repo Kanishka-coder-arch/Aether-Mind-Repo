@@ -1,4 +1,4 @@
-# Content Intelligence Platform - Design Document
+# AI Content Assistant - Design Document
 
 ## System Architecture
 
@@ -137,3 +137,4 @@ AWS SAM / CloudFormation Template
 - **AWS Cost Explorer**: Track daily spending
 - **Budget Alerts**: Set $50/month budget with alerts at 80%
 - **Tagging Strategy**: Tag all resources with "Project: ContentAI"
+
